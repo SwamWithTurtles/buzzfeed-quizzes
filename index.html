@@ -1,63 +1,274 @@
 <html>
 <head><title>Buzzfeed Quiz</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+
     <script
             src="https://code.jquery.com/jquery-3.2.1.js"
             integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
             crossorigin="anonymous"></script>
 
-<script>
-    $(function() {
+    <script>
+        $(function () {
 
-        var Option = function(noun, verb) {
-            return {
-                noun: noun,
-                verb: verb
+            var Option = function (noun, verb) {
+                return {
+                    noun: noun,
+                    verb: verb
+                }
+            };
+
+            var elementFrom = function (items) {
+                return items[Math.floor(Math.random() * items.length)];
             }
-        };
 
-        var elementFrom = function(items) {return items[Math.floor(Math.random()*items.length)];}
+            var headline = ["Tell us $4 and we'll $5.",
+                "Pick $H $1 and we'll $5.",
+                "Which $A are you based on your $1 preferences?",
+                "Which $A are you?",
+                "Are you actually $6 $A?",
+                "We know which $2 you $3 based on $4.",
+                "We know what you $3 based on $4.",
+                "Answer $7 questions about $4 and we'll $5.",
+                "We'll $5 based on $9.",
+                "Plan a party for $6 $A and we'll $5.",
+                "Choose $H $1 and we'll $5.",
+                "Rate $7 $1s and we'll $5.",
+                "How terrible $6 $A are you actually?",
+                "This $1 'Would You Rather' will $5."];
 
-        var headline = ["Tell us your $4 and we'll work out which $2 you $3",
-            "Pick a $1 and we'll tell you which $2 you $3",
-            "Your $4 will tell us which $2 you $3",
-            "Which $2 are you based on your $1 preferences?",
-            "What kind of $2 are you?",
-            "Are you actually a $1?",
-            "We know which $2 you $3 based on your favourite $1"];
+            var modifiers = [
+                "your favourite $1",
+                "your favourite $1",
+                "your favourite $1",
+                "your $1 preferences"
+            ];
 
-        var modifiers = [
-            "favourite $1",
-            "$1 preferences"
-        ];
+            var resultsGiver = [
+                "work out which $2 you $3",
+                "$8 reveal which $2 you $3",
+                "tell you which $2 you $3",
+                "$8 determine which $2 you $3",
+                "guess which $2 you $3",
+                "know which $2 you $3",
+                "give you $F $2",
+                "reveal $F $2 for you"
+            ];
 
-        var option1 = ["cat",
-        "sport",
-        "Gossip Girl actor",
-        "Olympic Sport",
-        "sex position",
-        "Taylor Swift Album"];
+            var adverb = [
+                "definitely",
+                "directly",
+                "totally",
+                "actually",
+                "literally",
+                "accurately"
+            ];
 
-        var option2 = [new Option("artisianal honey brand", ["should buy", "are", "smell like"]),
-        new Option("fluffy cat", ["would love", "are", "embody"]),
-        new Option("One Direction Member", ["are", "would date", "fancy"]),
-        new Option("Disney Princess", ["are"]),
-        new Option("Great British Bake-off Winner", ["are", "should date"])];
+            var option1 = ["$G",
+                "sport",
+                "'$C' actor",
+                "Olympic Sport",
+                "sex position",
+                "Broadway show",
+                "Disney Movie",
+                "'$C' character",
+                "$E Song",
+                "$B Member",
+                "$D Contestant",
+                "$D Winner",
+                "David Beckham haircut",
+                "ice cream flavour",
+                "spooky snack",
+                "lipstick colour",
+                "haircut",
+                "beard",
+                "Dreamy Boyfriend",
+                "dog breed"
+            ];
 
-        var whatAreYou = elementFrom(option2);
+            var animals = [
+                "cat",
+                "dog",
+                "rabbit",
+                "bun",
+                "floof",
+                "pupper",
+                "horse",
+                "snake",
+                "emu",
+                "fish"
+            ];
 
-        $("#quiz").text(elementFrom(headline)
-            .replace("$4", elementFrom(modifiers))
-            .replace("$1", elementFrom(option1))
-            .replace("$2", whatAreYou.noun)
-            .replace("$3", elementFrom(whatAreYou.verb)));
-    })
+            var animalAdjectives = [
+                "fluffy",
+                "adorable",
+                "baby",
+                "cute",
+                "terrifying"
+            ];
+
+            var option2 = [
+                new Option("artisinal honey brand", ["should buy", "smell like"]),
+                new Option("$G", ["would love", "are", "embody"]),
+                new Option("$B Member", ["are", "would date", "fancy"]),
+                new Option("Disney Princess", ["are", "are most like"]),
+                new Option("Disney Prince", ["are", "are most like", "would fall in love with at first sight", "would fall in love with", "you would totally bang"]),
+                new Option("$D Winner", ["are", "should date"]),
+                new Option("pumpkin", ["are", "should eat", "should carve"]),
+                new Option("mad scientist", ["are", "should be best friends with"]),
+                new Option("Starbucks drink", ["should try", "should drink", "should avoid"]),
+                new Option("job", ["should try", "should have", "should avoid", "would be a perfect fit for"]),
+                new Option("hot sauce", ["should try", "would love"]),
+                new Option("'$C' character", ["should hook up with", "are", "embody", "would be great with"]),
+                new Option("'$C' character", ["should hook up with", "are", "embody", "would be great with"]),
+                new Option("'$C' character", ["should hook up with", "are", "embody", "would be great with"]),
+                new Option("horror movie", ["would love", "would survive", "should watch tonight"]),
+                new Option("cartoon dog", ["are", "should own", "would be a great owner for"]),
+                new Option("'Goosebumps' book", ["should read", "have as your autobiography"]),
+                new Option("Hemsworth Brother", ["are", "are secretly in love with"]),
+                new Option("Hipster Boyfriend", ["are", "fall totally in love with"]),
+                new Option("beard", ["need", "should have", "would totally fall in love with", "can no longer live without"]),
+                new Option("Powerpuff Girl", ["are", "are most like"]),
+                new Option("celebrity chef", ["are", "should date"]),
+                new Option("costume", ["should wear", "should wear for Halloween", "should wear for Christmas"]),
+                new Option("Gatorade Flavour", ["love", "should try"]),
+                new Option("'90s Heartthrob", ["are destined to marry", "would love"]),
+                new Option("Netflix Show", ["would love", "are most like", "should watch next"]),
+                new Option("future husband", ["need in your life"]),
+                new Option("Kardashian", ["are", "look like", "would fall madly in love with"]),
+                new Option("Disney Realm", ["belong in"]),
+                new Option("Hogwarts House", ["belong to", "should be in", "would be at home in"])
+            ];
+
+            var option2youCanBe = option2.filter(function (o) {
+                return o.verb.includes("are");
+            });
+
+            var numbers = [
+                "some",
+                "these",
+                "three",
+                "seven",
+                "five",
+                "six",
+                "a bunch of completely random"
+            ];
+
+            var withChance = function (chance, f, g) {
+                if (chance > Math.random()) {
+                    f();
+                } else {
+                    (g || function() {})();
+                }
+            };
+
+            var articleFor = function(s) {
+                if(s.indexOf("One") === 0 ) {return "a";}
+                return ["a", "e", "i", "o", "u"].includes(s.charAt(0).toLowerCase()) ? "an" : "a";
+            }
+
+            var sillyClickbait = [
+                "It will blow your mind!",
+                "You won't know how we did it",
+                "Wow!",
+                "Spooky!"
+            ]
+
+            var band = [
+                "One Direction",
+                "Radiohead",
+                "Little Mix",
+                "Queen"
+            ];
+
+            var musician = band.concat([
+                "Taylor Swift",
+                "Justin Bieber",
+                "Madonna",
+                "Beyonce",
+                "Selena Gomez"
+            ]);
+
+            var tvAndMovieShow = [
+                "Gilmore Girls",
+                "Grey's Anatomy",
+                "Parks and Recreation",
+                "The Office",
+                "GoT",
+                "Mean Girls",
+                "Home Alone",
+                "American Horror Story",
+                "Doctor Who"
+            ];
+
+            var realityShow = [
+                "Great British Bake-Off",
+                "Bacholerette",
+                "The Apprentice",
+                "Survivor",
+                "Britain's Got Talent",
+                "X-Factor"
+            ];
+
+            var whatVerbYou = elementFrom(option2);
+            var whatAreYou = elementFrom(option2youCanBe);
+
+            var completeHeadline = elementFrom(headline);
+
+            var selectedThing = elementFrom(option1);
+            withChance(0.4, function() {
+                completeHeadline = completeHeadline.replace("$G", elementFrom(animalAdjectives) + " $G");
+            });
+
+            completeHeadline = completeHeadline
+                .replace("$9", elementFrom(["$4", "$7 questions"]))
+                .replace("$5", elementFrom(resultsGiver))
+                .replace("$4", elementFrom(modifiers))
+                .replace("$1", selectedThing)
+                .replace("$2", whatVerbYou.noun)
+                .replace("$3", elementFrom(whatVerbYou.verb))
+                .replace("$6", articleFor(whatAreYou.noun))
+                .replace("$7", elementFrom(numbers))
+                .replace("$A", whatAreYou.noun)
+                .replace("$B", elementFrom(band))
+                .replace("$B", elementFrom(band))
+                .replace("$C", elementFrom(tvAndMovieShow))
+                .replace("$C", elementFrom(tvAndMovieShow))
+                .replace("$D", elementFrom(realityShow))
+                .replace("$E", elementFrom(musician))
+                .replace("$F", articleFor(whatVerbYou.noun))
+                .replace("$G", elementFrom(animals))
+                .replace("$G", elementFrom(animals))
+                .replace("$H", articleFor(selectedThing));
+
+            completeHeadline = completeHeadline.charAt(0).toUpperCase() + completeHeadline.slice(1);
+
+            withChance(0.3, function() {
+                completeHeadline = completeHeadline.replace(".", "!");
+            }, function() {});
+
+            withChance(0.05, function () {
+                completeHeadline = completeHeadline.replace("$8", elementFrom(adverb))
+            }, function () {
+                completeHeadline = completeHeadline.replace(" $8 ", " ");
+            });
+
+            withChance(0.01, function() {
+                completeHeadline = completeHeadline + " " + elementFrom(sillyClickbait);
+            }, function() {})
+
+            $("#quiz").text(completeHeadline);
+        })
 
 
-
-</script>
+    </script>
 </head>
 <body>
-    <h1 id="quiz"></h1>
+<div class="row" style="padding-top: 20px">
+    <div class="col-1"></div>
+    <h1 id="quiz" class="col-10"></h1>
+    <div class="col-1"></div>
+</div>
 </body>
 </html>
