@@ -1,0 +1,62 @@
+<html>
+<head><title>Buzzfeed Quiz</title>
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+
+        var Option = function(noun, verb) {
+            return {
+                noun: noun,
+                verb: verb
+            }
+        };
+
+        var elementFrom = function(items) {return items[Math.floor(Math.random()*items.length)];}
+
+        var headline = ["Tell us your $4 and we'll work out which $2 you $3",
+            "Pick a $1 and we'll tell you which $2 you $3",
+            "Your $4 will tell us which $2 you $3",
+            "Which $2 are you based on your $1 preferences?",
+            "What kind of $2 are you?",
+            "Are you actually a $1?",
+            "We know which $2 you $3 based on your favourite $1"];
+
+        var modifiers = [
+            "favourite $1",
+            "$1 preferences"
+        ];
+
+        var option1 = ["cat",
+        "sport",
+        "Gossip Girl actor",
+        "Olympic Sport",
+        "sex position"];
+
+        var option2 = [new Option("artisianal honey brand", ["should buy", "are", "smell like"]),
+        new Option("fluffy cat", ["would love", "are", "embody"]),
+        new Option("One Direction Member", ["are", "would date", "fancy"]),
+        new Option("Disney Princess", ["are"]),
+        new Option("Great British Bake-off Winner", ["are", "should date"])];
+
+        var whatAreYou = elementFrom(option2);
+
+        $("#quiz").text(elementFrom(headline)
+            .replace("$4", elementFrom(modifiers))
+            .replace("$1", elementFrom(option1))
+            .replace("$2", whatAreYou.noun)
+            .replace("$3", elementFrom(whatAreYou.verb)));
+    })
+
+
+
+</script>
+</head>
+<body>
+    <h1 id="quiz"></h1>
+</body>
+</html>
